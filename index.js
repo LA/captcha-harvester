@@ -352,7 +352,8 @@ function initBankServer() {
     captchaBank = _.reject(captchaBank, function(el) {
       return el.token === captchaBankItem.token;
     });
-    console.log(captchaBank)
+    console.log(captchaBank);
+    res.json({error: null, message: 'Redeemed captcha'});
   });
 
   bankServer = bankExpressApp.listen(bankExpressApp.get('port'));

@@ -17,77 +17,77 @@ $('#portNo').val(settingsValues.port);
 $('#portNoServer').val(settingsValues.server_port);
 
 $('#sitekey').change(function() {
-    settingsValues.sitekey = $(this).val()
-    app.ch.settings.set('sitekey', $(this).val());
+  settingsValues.sitekey = $(this).val()
+  app.ch.settings.set('sitekey', $(this).val());
 });
 
 $('#solveURL').change(function() {
-    settingsValues.host = $(this).val()
-    app.ch.settings.set('host', $(this).val());
+  settingsValues.host = $(this).val()
+  app.ch.settings.set('host', $(this).val());
 });
 
 $('#portNo').change(function() {
-    settingsValues.port = $(this).val()
-    app.ch.settings.set('port', $(this).val());
+  settingsValues.port = $(this).val()
+  app.ch.settings.set('port', $(this).val());
 });
 
 $('#portNoServer').change(function() {
-    settingsValues.server_port = $(this).val()
-    app.ch.settings.set('server_port', $(this).val());
+  settingsValues.server_port = $(this).val()
+  app.ch.settings.set('server_port', $(this).val());
 });
 
 $('#saveSettings').click(() => {
-    remote.getCurrentWindow().reload();
-    ipcRenderer.send('restartServer');
-    ipcRenderer.send('saveSettings');
+  remote.getCurrentWindow().reload();
+  ipcRenderer.send('restartServer');
+  ipcRenderer.send('saveSettings');
 });
 
 $('#openCapWindow').click(() => {
-    ipcRenderer.send('openCapWindow');
+  ipcRenderer.send('openCapWindow');
 });
 
 $('#openEndpoint').click(() => {
-    shell.openExternal(`http://127.0.0.1:${settingsValues.server_port}`);
+  shell.openExternal(`http://127.0.0.1:${settingsValues.server_port}`);
 });
 
 $('#login').click(() => {
-    ipcRenderer.send('login');
+  ipcRenderer.send('login');
 });
 
 $('#logout').click(() => {
 
-    ipcRenderer.send('logout');
-    $("#logout").prop("disabled", true);
-    $("#logout").text('Logging Out...');
+  ipcRenderer.send('logout');
+  $("#logout").prop("disabled", true);
+  $("#logout").text('Logging Out...');
 
-    setTimeout(function() {
-      $("#logout").text('Log Out');
-      $("#logout").prop("disabled", false);
-    }, 2000);
+  setTimeout(function() {
+    $("#logout").text('Log Out');
+    $("#logout").prop("disabled", false);
+  }, 2000);
 
 });
 
 ipcRenderer.on('openWindowError', function(event, data) {
 
-    $("#openCapWindow").prop("disabled", true);
-    $("#openCapWindow").text('Captcha Window is already open.');
+  $("#openCapWindow").prop("disabled", true);
+  $("#openCapWindow").text('Captcha Window is already open.');
 
-    setTimeout(function() {
-      $("#openCapWindow").text('Open Captcha Window');
-      $("#openCapWindow").prop("disabled", false);
-    }, 2000);
+  setTimeout(function() {
+    $("#openCapWindow").text('Open Captcha Window');
+    $("#openCapWindow").prop("disabled", false);
+  }, 2000);
 
 });
 
 ipcRenderer.on('openLoginError', function(event, data) {
 
-    $("#login").prop("disabled", true);
-    $("#login").text('Login Window is already open.');
+  $("#login").prop("disabled", true);
+  $("#login").text('Login Window is already open.');
 
-    setTimeout(function() {
-      $("#login").text('Authenticate Account');
-      $("#login").prop("disabled", false);
-    }, 2000);
+  setTimeout(function() {
+    $("#login").text('Authenticate Account');
+    $("#login").prop("disabled", false);
+  }, 2000);
 
 });
 
@@ -105,6 +105,11 @@ ipcRenderer.on('updateHistory', function(event, data) {
   } else {
     $(`#${data.token}`).text(`Expires in ${data.time} seconds`);
   }
+});
+
+ipcRenderer.on('markCompleted', function(event, data) {
+  $(`#${data.token}`).text('Used')
+  $(`#${data.token}`).css({'background-color': '#04d60d'});
 });
 
 ipcRenderer.on('markExpired', function(event, data) {

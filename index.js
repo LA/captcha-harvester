@@ -375,6 +375,16 @@ function initCapWindow() {
       capWin.webContents.session.setProxy({proxyRules:""}, function () {});
     })
 
+    expressApp.post('/hide', (req, res) => {
+      capWin.webContents.send('hideCaptchaFrame');
+      res.json({error: null, message: 'Hiding captcha frame'});
+    });
+
+    expressApp.post('/show', (req, res) => {
+      capWin.webContents.send('showCaptchaFrame');
+      res.json({error: null, message: 'Showing captcha frame'});
+    });
+
     var server = expressApp.listen(expressApp.get('port'));
 
     win.webContents.session.setProxy({
@@ -398,6 +408,11 @@ function initCapWindow() {
       useContentSize: true,
       width: 450
     })
+
+    capWin.on('markCompleted', function(event, data) {
+      $(`#${data.token}`).text('Used')
+      $(`#${data.token}`).css({'background-color': '#04d60d'});
+    });
 
     // No menu on the About settingsWindow
     capWin.setMenu(null);

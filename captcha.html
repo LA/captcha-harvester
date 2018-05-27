@@ -9,7 +9,7 @@
     </style>
   </head>
   <body>
-      <p style="font-family: Helvetica; text-align: center; margin-top: 25px;">Wait For Captchas To Appear</p>
+      <p style="font-family: Helvetica; text-align: center; margin: 25px 15px;">Watch Solve History and Solve Captchas In Here If They Appear</p>
   <form action="/submit" method="post" style="margin: 180px auto auto auto;">
       <div id="captchaFrame"></div>
       <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
@@ -28,15 +28,16 @@
   const remote = require('electron').remote
   const app = remote.app
   const ipcRenderer = require('electron').ipcRenderer
-  const captchaHTML = `<div class="g-recaptcha" data-sitekey="${remote.getGlobal('sitekey')}" data-callback="sub"></div>`
+  const captchaHTML = `<div class="g-recaptcha" data-sitekey="${remote.getGlobal('sitekey')}" data-callback="sub" data-size="invisible"></div>`
 
 
   // TODO: Wait for main process to send captcha sitekey over to render
 
-  $('#captchaFrame').html(captchaHTML).css('display', 'none');
+  $('#captchaFrame').html(captchaHTML);
 
   ipcRenderer.on('showCaptchaFrame', function(event, data) {
-    $(`#captchaFrame`).css('display', 'block');
+    //$(`#captchaFrame`).css('display', 'block');
+    grecaptcha.execute();
   });
 
   ipcRenderer.on('hideCaptchaFrame', function(event, data) {

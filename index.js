@@ -347,7 +347,7 @@ function initBankServer() {
     const { token } = req.body;
     if (!token) res.json({error: 'Invalid token'});
     console.log('Redeeming Captcha Token');
-    const captchaBankItem = captchaBank[captchaBank.indexOf(captchaBank.filter(el => el.token === token)[0])];
+    const captchaBankItem = captchaBank.filter(el => el.token === token)[0];
     win.webContents.send('markCompleted', captchaBankItem);
     captchaBank = _.reject(captchaBank, function(el) {
       return el.token === captchaBankItem.token;

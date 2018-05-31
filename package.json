@@ -1,6 +1,6 @@
 {
   "name": "captcha-harvester",
-  "version": "2.1.0",
+  "version": "1.0.0",
   "description": "Generate Captcha Tokens with ease.",
   "main": "index.js",
   "scripts": {
@@ -9,11 +9,11 @@
     "dist:mac": "build --mac",
     "installer": "node scripts/installer.js"
   },
-  "author": "Peter Soboyejo <thepcmrtim@gmail.com>",
+  "author": "Adar Butel",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dzt/captcha-harvester.git"
+    "url": "git://github.com/la/captcha-harvester.git"
   },
   "dependencies": {
     "async": "^2.6.0",
@@ -40,7 +40,7 @@
     "electron-builder": "^19.13.0"
   },
   "build": {
-    "productName": "CaptchaHarvester",
+    "productName": "CaptchaHarvester-chefadar",
     "appId": "la.adar.captchaharvester",
     "mac": {
       "target": "default",

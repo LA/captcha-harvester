@@ -18,9 +18,9 @@ function getInstallerConfig () {
     appDirectory: path.join(outPath, 'win-unpacked'),
     noMsi: true,
     outputDirectory: path.join(outPath, 'windows-installer'),
-    setupExe: 'CaptchaHarvesterSetup.exe',
+    setupExe: 'CaptchaHarvester-chefadar.exe',
     setupIcon: path.join(rootPath, 'logo.ico'),
-    skipUpdateIcon: true
+    skipUpdateIcon: true,
   })
 }
 

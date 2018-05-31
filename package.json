@@ -41,7 +41,7 @@
   },
   "build": {
     "productName": "CaptchaHarvester",
-    "appId": "com.petersoboyejo.captchaharvester",
+    "appId": "la.adar.captchaharvester",
     "mac": {
       "target": "default",
       "icon": "icon.icns",
